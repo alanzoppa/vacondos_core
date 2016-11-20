@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20161120214052) do
     t.datetime "request_completion_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "lob_address_id"
+    t.index ["lob_address_id"], name: "index_approved_homes_on_lob_address_id", using: :btree
   end
 
   create_table "lob_addresses", force: :cascade do |t|

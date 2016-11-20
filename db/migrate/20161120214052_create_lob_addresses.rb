@@ -11,5 +11,6 @@ class CreateLobAddresses < ActiveRecord::Migration[5.0]
       t.column :lob_data_message, :string
       t.timestamps
     end
+    add_reference :approved_homes, :lob_address
   end
 end
