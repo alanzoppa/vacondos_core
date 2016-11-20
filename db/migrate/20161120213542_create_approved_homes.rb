@@ -6,9 +6,9 @@ class CreateApprovedHomes < ActiveRecord::Migration[5.0]
       t.column :detail_uri, :string
       t.column :address, :string
       t.column :status, :string
-      t.column :last_update, :datetime
-      t.column :request_received_date, :datetime
-      t.column :request_completion_date, :datetime
+      t.column :last_update, :date
+      t.column :request_received_date, :date
+      t.column :request_completion_date, :date
       t.timestamps
     end
   end

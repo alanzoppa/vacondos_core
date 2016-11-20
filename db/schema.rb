@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20161120221110) do
     t.string   "detail_uri"
     t.string   "address"
     t.string   "status"
-    t.datetime "last_update"
-    t.datetime "request_received_date"
-    t.datetime "request_completion_date"
+    t.date     "last_update"
+    t.date     "request_received_date"
+    t.date     "request_completion_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "lob_address_id"
