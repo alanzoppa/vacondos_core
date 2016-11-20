@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120214052) do
+ActiveRecord::Schema.define(version: 20161120221110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "approved_homes", force: :cascade do |t|
+  create_table "homes", force: :cascade do |t|
     t.string   "condo_name"
     t.string   "va_condo_id"
     t.string   "detail_uri"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20161120214052) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "lob_address_id"
-    t.index ["lob_address_id"], name: "index_approved_homes_on_lob_address_id", using: :btree
+    t.index ["lob_address_id"], name: "index_homes_on_lob_address_id", using: :btree
   end
 
   create_table "lob_addresses", force: :cascade do |t|
