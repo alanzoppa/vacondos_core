@@ -53,7 +53,7 @@ def debug_output(data, current_home, filename)
   out << ""
   out << "Nothing has been saved.".red.bold
   out << ""
-  out << "Duplicate rows: #{csv_indices.join(', ')}".yellow.bold
+  out << "Duplicate lines: #{csv_indices.join(', ')}".yellow.bold
   duplicate_rows.each do |h|
     out << ""
     out << h[0].to_h.to_yaml.colorize(:yellow)
@@ -62,7 +62,6 @@ def debug_output(data, current_home, filename)
 end
 
 task import_csvs_in_input: [:environment] do
-  Home.destroy_all
   input_path = File.join(Rails.root, 'input')
   filenames = Dir.entries(input_path).select {|f| f =~ /\.csv$/}
   filenames.map! {|f| File.join(input_path, f) }
@@ -73,16 +72,16 @@ task import_csvs_in_input: [:environment] do
       data = matrix[1..-1].map do |row|
         home_and_lob_from_hash(headers.zip(row).to_h)
       end
-        data.each_with_index do |d, index|
-          home, lob = d
-          begin
-            home = Home.create(home)
-            LobAddress.create(lob.update(home: home)) unless lob.nil?
-          rescue ActiveRecord::RecordNotUnique => e
-            print debug_output(data, home, filename)
-            raise ActiveRecord::Rollback
-          end
+      data.each_with_index do |d, index|
+        home, lob = d
+        begin
+          home = Home.create(home)
+          LobAddress.create(lob.update(home: home)) unless lob.nil?
+        rescue ActiveRecord::RecordNotUnique => e
+          print debug_output(data, home, filename)
+          raise ActiveRecord::Rollback
         end
       end
+    end
   }
 end

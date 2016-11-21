@@ -2,7 +2,7 @@ class CreateApprovedHomes < ActiveRecord::Migration[5.0]
   def change
     create_table :homes do |t|
       t.string :condo_name
-      t.string :va_condo_id
+      t.string :va_condo_id, null: false
       t.string :detail_uri
       t.string :address
       t.string :status

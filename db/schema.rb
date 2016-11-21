@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161120214052) do
 
   create_table "homes", force: :cascade do |t|
     t.string   "condo_name"
-    t.string   "va_condo_id"
+    t.string   "va_condo_id",             null: false
     t.string   "detail_uri"
     t.string   "address"
     t.string   "status"
