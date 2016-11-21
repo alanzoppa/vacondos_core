@@ -11,6 +11,6 @@ class CreateLobAddresses < ActiveRecord::Migration[5.0]
       t.column :message, :string
       t.timestamps
     end
-    add_reference :lob_addresses, :home
+    add_reference :lob_addresses, :home, null: false
   end
 end

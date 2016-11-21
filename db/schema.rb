@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161120214052) do
     t.date     "request_completion_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["detail_uri"], name: "index_homes_on_detail_uri", unique: true, using: :btree
     t.index ["va_condo_id"], name: "index_homes_on_va_condo_id", unique: true, using: :btree
   end
 
@@ -40,7 +41,7 @@ ActiveRecord::Schema.define(version: 20161120214052) do
     t.string   "message"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "home_id"
+    t.integer  "home_id",         null: false
     t.index ["home_id"], name: "index_lob_addresses_on_home_id", using: :btree
   end
 

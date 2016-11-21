@@ -1,3 +1,3 @@
 class LobAddress < ApplicationRecord
-  belongs_to :approved_home
+  belongs_to :home
 end
