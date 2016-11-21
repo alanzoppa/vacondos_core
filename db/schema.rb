@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120221110) do
+ActiveRecord::Schema.define(version: 20161120214052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,21 +26,22 @@ ActiveRecord::Schema.define(version: 20161120221110) do
     t.date     "request_completion_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "lob_address_id"
-    t.index ["lob_address_id"], name: "index_homes_on_lob_address_id", using: :btree
+    t.index ["va_condo_id"], name: "index_homes_on_va_condo_id", unique: true, using: :btree
   end
 
   create_table "lob_addresses", force: :cascade do |t|
-    t.string   "lob_data_address_line1"
-    t.string   "lob_data_address_line2"
-    t.string   "lob_data_address_city"
-    t.string   "lob_data_address_state"
-    t.string   "lob_data_address_zip"
-    t.string   "lob_data_address_country"
-    t.string   "lob_data_object"
-    t.string   "lob_data_message"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "address_city"
+    t.string   "address_state"
+    t.string   "address_zip"
+    t.string   "address_country"
+    t.string   "object"
+    t.string   "message"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "home_id"
+    t.index ["home_id"], name: "index_lob_addresses_on_home_id", using: :btree
   end
 
 end
