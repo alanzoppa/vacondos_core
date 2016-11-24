@@ -21,9 +21,9 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
-  <<: *default
-  database: vacondos_core_development
+#development:
+  #<<: *default
+  #database: vacondos_core_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,7 +80,18 @@ test:
 #
 production:
   <<: *default
-  database: vacondos_core_production
-  username: vacondos_core
+  database: vacondos
+  username: vacondos
   password: <%= ENV['VACONDOS_CORE_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>
+
+
+#人 PGPASSWORD=VnXMGI6b7k2k psql --host vacondos.ckaby1iz1vgy.us-east-2.rds.amazonaws.com --username vacondos --dbname vacondos -f dump.sql
+
+development:
+  <<: *default
+  database: vacondos
+  username: vacondos
+  password: VnXMGI6b7k2k
+  url: vacondos.ckaby1iz1vgy.us-east-2.rds.amazonaws.com
+  port: 5432
