@@ -83,3 +83,4 @@ production:
   database: vacondos_core_production
   username: vacondos_core
   password: <%= ENV['VACONDOS_CORE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
