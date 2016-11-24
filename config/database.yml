@@ -80,18 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: vacondos
-  username: vacondos
-  password: <%= ENV['VACONDOS_CORE_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>
-
-
-#人 PGPASSWORD=VnXMGI6b7k2k psql --host vacondos.ckaby1iz1vgy.us-east-2.rds.amazonaws.com --username vacondos --dbname vacondos -f dump.sql
-
-development:
-  <<: *default
-  database: vacondos
-  username: vacondos
-  password: VnXMGI6b7k2k
-  url: vacondos.ckaby1iz1vgy.us-east-2.rds.amazonaws.com
-  port: 5432
