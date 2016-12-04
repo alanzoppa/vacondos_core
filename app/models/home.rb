@@ -13,7 +13,7 @@ class Home < ApplicationRecord
         city: self.lob_address.address_city,
         state: self.lob_address.address_state,
         zip: self.lob_address.address_zip,
-        country: self.lob_address.address_zip,
+        country: self.lob_address.address_country,
       }
     }
   end
