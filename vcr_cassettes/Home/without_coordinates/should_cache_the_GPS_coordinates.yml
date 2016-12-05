@@ -1,0 +1,118 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=1000%2BW%2BWASHINGTON%2BBLVD%252C%2BCHICAGO%252C%2BIL%2B60607-2137&key=AIzaSyDigP87Kd4RoNoCP8yV0g4CCmGp2Ps56Vo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Dec 2016 02:33:16 GMT
+      Expires:
+      - Tue, 06 Dec 2016 02:33:16 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "1000",
+                       "short_name" : "1000",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "West Washington Boulevard",
+                       "short_name" : "W Washington Blvd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Near West Side",
+                       "short_name" : "Near West Side",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Chicago",
+                       "short_name" : "Chicago",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Cook County",
+                       "short_name" : "Cook County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Illinois",
+                       "short_name" : "IL",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "60607",
+                       "short_name" : "60607",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "1000 W Washington Blvd, Chicago, IL 60607, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 41.8834391,
+                       "lng" : -87.65272
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 41.8847880802915,
+                          "lng" : -87.65137101970849
+                       },
+                       "southwest" : {
+                          "lat" : 41.8820901197085,
+                          "lng" : -87.6540689802915
+                       }
+                    }
+                 },
+                 "partial_match" : true,
+                 "place_id" : "ChIJqx1VLtosDogRu5E9wb40poM",
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Dec 2016 02:33:16 GMT
+recorded_with: VCR 3.0.3

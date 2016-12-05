@@ -33,8 +33,12 @@ class Home < ApplicationRecord
 
   def require_coordinate!
     if self.coordinate.nil?
-      raise "Do not call this method on an unverified address"
+      raise "Do not call this method on an address without coordinates"
     end
+  end
+
+  def coordinates!
+    self.coordinate || fetch_coordinates!
   end
 
   def fetch_coordinates!

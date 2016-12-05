@@ -66,13 +66,13 @@ RSpec.describe Home, type: :model do
   end
 
   context "without coordinates", :vcr do
-    before :all do
+    before :each do
       @home = Home.create(condo_hash)
       LobAddress.create(lob_address_hash.merge(home: @home))
       @home.reload
     end
 
-    after :all do
+    after :each do
       @home.destroy
     end
 
@@ -98,6 +98,13 @@ RSpec.describe Home, type: :model do
       expect(data.longitude).to eql "-87.65272"
       expect(data.latitude).to eql "41.8834391"
     end
+
+    it "should return coordinates or an error from coordinates!" do
+      expect(@home.coordinate).to be_nil
+      expect(@home.coordinates!.latitude).to eql "41.8834391"
+      expect(@home.coordinates!.longitude).to eql "-87.65272"
+    end
+
 
   end
 
