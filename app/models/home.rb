@@ -3,9 +3,8 @@ class Home < ApplicationRecord
   has_one :coordinate, dependent: :destroy
 
   def confident_to_object
-    if self.lob_address.nil? || self.coordinate.nil?
-      raise "Do not call this method on an unverified address"
-    end
+    require_lob_address!
+    require_coordinate!
     return {
       condo_name: self.condo_name,
       status: self.status,
@@ -26,10 +25,21 @@ class Home < ApplicationRecord
     }
   end
 
+  def require_lob_address!
+    if self.lob_address.nil?
+      raise "Do not call this method on an unverified address"
+    end
+  end
+
+  def require_coordinate!
+    if self.coordinate.nil?
+      raise "Do not call this method on an unverified address"
+    end
+  end
+
   def fetch_coordinates!
     l = google_geolocation_response!.dig(:results, 0, :geometry, :location)
-
-    #data[:results].first[:geometry][:location]
+    raise "No location data in #{google_geolocation_response!.inspect}" if l.nil?
     Coordinate.create(
       latitude: l[:lat].to_s,
       longitude: l[:lng].to_s,
@@ -38,6 +48,7 @@ class Home < ApplicationRecord
   end
 
   def google_search_string
+    require_lob_address!
     house = self.lob_address.address_line1
     if self.lob_address.address_line2
       house = "#{house} #{self.lob_address.address_line2}"
@@ -61,7 +72,6 @@ class Home < ApplicationRecord
     @google_geolocation_response ||= HashWithIndifferentAccess.new.update(
       JSON.parse open(google_search_url).read
     )
-    @google_geolocation_response
   end
 
 

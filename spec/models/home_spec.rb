@@ -76,10 +76,6 @@ RSpec.describe Home, type: :model do
       @home.destroy
     end
 
-    #it "should do stuff" do
-      #@home.fetch_coordinates!
-    #end
-
     it "should create a search string" do
       expect(@home.google_search_string).to eql "1000 W WASHINGTON BLVD, CHICAGO, IL 60607-2137"
     end
@@ -101,6 +97,25 @@ RSpec.describe Home, type: :model do
       data = @home.fetch_coordinates!
       expect(data.longitude).to eql "-87.65272"
       expect(data.latitude).to eql "41.8834391"
+    end
+
+  end
+
+  context "sad path" do
+    before :all do
+      @home = Home.create(condo_hash)
+    end
+
+    after :all do
+      @home.destroy
+    end
+
+    it "should raise an error if you call confident_to_object" do
+      expect { @home.confident_to_object }.to raise_error(RuntimeError)
+    end
+
+    it "should raise an error if you call google_search_string" do
+      expect { @home.google_search_string }.to raise_error(RuntimeError)
     end
 
   end
