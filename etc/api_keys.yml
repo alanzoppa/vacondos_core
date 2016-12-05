@@ -1,0 +1,5 @@
+geolocation:
+  protocol: https
+  path: /maps/api/geocode/json
+  host: maps.googleapis.com
+  key: AIzaSyDigP87Kd4RoNoCP8yV0g4CCmGp2Ps56Vo

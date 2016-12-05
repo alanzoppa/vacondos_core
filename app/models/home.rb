@@ -26,13 +26,39 @@ class Home < ApplicationRecord
     }
   end
 
-  def fetch_coordinates!
-    binding.pry
+  #def fetch_coordinates!
+    #binding.pry
+  #end
+
+  def google_search_string
+    house = self.lob_address.address_line1
+    if self.lob_address.address_line2
+      house = "#{house} #{self.lob_address.address_line2}"
+    end
+    "#{house}, #{self.lob_address.address_city}, #{self.lob_address.address_state} #{self.lob_address.address_zip}"
   end
 
-  def self.all_complete
-    Home.includes(:lob_address).where(
-      "EXISTS (SELECT home_id FROM lob_addresses WHERE home_id = homes.id)"
+  def google_search_url
+    geo = CONFIG.api_keys.geolocation
+    URI::HTTPS.build(
+      host: geo[:host],
+      path: geo[:path],
+      query: {
+        key: geo[:key],
+        address: CGI.escape(google_search_string)
+      }.to_query
     )
   end
+
+  def google_geolocation_response!
+    @google_geolocation_response ||= HashWithIndifferentAccess.new.update(
+      JSON.parse open(google_search_url).read
+    )
+    @google_geolocation_response
+  end
+
+
+
+  #data[:results].first[:geometry][:location]
+
 end

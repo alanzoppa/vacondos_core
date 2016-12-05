@@ -75,9 +75,27 @@ RSpec.describe Home, type: :model do
       @home.destroy
     end
 
-    it "should do stuff" do
+    #it "should do stuff" do
       #@home.fetch_coordinates!
+    #end
+
+    it "should create a search string" do
+      expect(@home.google_search_string).to eql "1000 W WASHINGTON BLVD, CHICAGO, IL 60607-2137"
     end
+
+
+    it "should create an escaped search url" do
+      url = @home.google_search_url.to_s
+      expect(url).to eql("https://maps.googleapis.com/maps/api/geocode/json?address=1000%2BW%2BWASHINGTON%2BBLVD%252C%2BCHICAGO%252C%2BIL%2B60607-2137&key=AIzaSyDigP87Kd4RoNoCP8yV0g4CCmGp2Ps56Vo")
+    end
+
+    it "should return the raw google data as json" do
+      data = @home.google_geolocation_response!
+      expect(
+        data[:results].first[:geometry][:location]
+      ).to eql( {"lat"=>41.8834391, "lng"=>-87.65272} )
+    end
+
   end
 
 
