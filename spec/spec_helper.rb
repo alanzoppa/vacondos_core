@@ -16,7 +16,22 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'vcr_cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+end
+
+
 RSpec.configure do |config|
+
+  #config.extend VCR::RSpec::Macros
+
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -97,3 +112,4 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+

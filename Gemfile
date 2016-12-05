@@ -35,6 +35,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
   gem 'rspec-rails', '~> 3.5'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

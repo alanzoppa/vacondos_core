@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 condo_hash = {
   condo_name: "1000 WEST WASHINGTON LOFTS",
@@ -64,7 +65,7 @@ RSpec.describe Home, type: :model do
     end
   end
 
-  context "without coordinates" do
+  context "without coordinates", :vcr do
     before :all do
       @home = Home.create(condo_hash)
       LobAddress.create(lob_address_hash.merge(home: @home))
