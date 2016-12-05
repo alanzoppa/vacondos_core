@@ -97,6 +97,12 @@ RSpec.describe Home, type: :model do
       ).to eql( {"lat"=>41.8834391, "lng"=>-87.65272} )
     end
 
+    it "should cache the GPS coordinates" do
+      data = @home.fetch_coordinates!
+      expect(data.longitude).to eql "-87.65272"
+      expect(data.latitude).to eql "41.8834391"
+    end
+
   end
 
 

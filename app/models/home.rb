@@ -26,9 +26,16 @@ class Home < ApplicationRecord
     }
   end
 
-  #def fetch_coordinates!
-    #binding.pry
-  #end
+  def fetch_coordinates!
+    l = google_geolocation_response!.dig(:results, 0, :geometry, :location)
+
+    #data[:results].first[:geometry][:location]
+    Coordinate.create(
+      latitude: l[:lat].to_s,
+      longitude: l[:lng].to_s,
+      home: self
+    )
+  end
 
   def google_search_string
     house = self.lob_address.address_line1
